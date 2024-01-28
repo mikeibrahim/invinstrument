@@ -92,6 +92,7 @@ export default function SelectInstrument() {
             if (instrument === "menu") return
             np.buildFromName(NOTE_MAP[finger]).play()
             osmd.cursor.next()
+            console.log(osmd.cursor.NotesUnderCursor())
             console.log(NOTE_MAP[finger])
         }} isPlaying={isPlaying} />
         {instrument === "piano" ? <OpenSheetMusicDisplay setupOsmd={setupOsmd} file="happy-bday.xml" /> : null}
