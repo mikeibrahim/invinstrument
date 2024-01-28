@@ -58,6 +58,7 @@ export default function HandOverlay(props) {
         setSize({ x: video.offsetWidth, y: video.offsetHeight });
       }
       intervalId = setInterval(() => {
+        clearCanvas();
         detector.estimateHands(video).then((hands) => {
           hands?.forEach((hand) => {
             const keypoints = hand.keypoints;
@@ -72,12 +73,17 @@ export default function HandOverlay(props) {
     return () => clearInterval(intervalId);
   });
 
+  const clearCanvas = () => {
+    if (!canvas.current) return;
+    const ctx = canvas.current.getContext("2d");
+    ctx.clearRect(0, 0, canvas.current.width, canvas.current.height);
+  };
+
   const drawHand = (keypoints) => {
     if (!(canvas.current && keypoints)) return;
     const ctx = canvas.current.getContext("2d");
-    ctx.clearRect(0, 0, canvas.current.width, canvas.current.height);
     ctx.fillStyle = "blue";
-    let radius = 10;
+    let radius = 15;
 
     for (let i = 0; i < keypoints.length; i++) {
       let circle = new Path2D(); // <<< Declaration
