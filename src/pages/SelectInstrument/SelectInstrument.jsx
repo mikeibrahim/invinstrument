@@ -40,12 +40,12 @@ export default function SelectInstrument() {
         <HandOverlay hoverCallback={(x, y) => {
             instruments.forEach(i => {
                 const el = i.ref.current;
-                console.log(el)
+                console.log(i.hover);
                 if (
                     el.x <= x && x <= el.x + el.width &&
                     el.y <= y && y <= el.y + el.height
-                ) el.hover[1](true)
-                else el.hover[1](false)
+                ) i.hover[1](true)
+                else i.hover[1](false)
             })
         }} clickCallback={(x, y) => {
             instruments.forEach(i => {
