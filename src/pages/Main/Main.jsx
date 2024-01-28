@@ -9,6 +9,10 @@ export default function Main() {
     setIsPlaying(true);
   };
 
+  const clickCallback = (coordinates) => {
+    console.log("Clicked: ", coordinates);
+  };
+
   return (
     <div>
       <Video
@@ -18,7 +22,11 @@ export default function Main() {
         }
         playCallback={playCallback}
       />
-      <HandOverlay isPlaying={isPlaying} />
+      <HandOverlay
+        clickCallback={clickCallback}
+        hoverCallback={() => {}}
+        isPlaying={isPlaying}
+      />
     </div>
   );
 }

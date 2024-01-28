@@ -32,6 +32,8 @@ const handKey = {
 export default function HandOverlay(props) {
   const [detector, setDetector] = useState(null);
   const [size, setSize] = useState({ x: 0, y: 0 });
+  let [clicking, setClicking] = useState(false);
+
   const video = document.getElementById("video");
   const canvas = React.createRef();
 
@@ -57,7 +59,6 @@ export default function HandOverlay(props) {
       }
       intervalId = setInterval(() => {
         detector.estimateHands(video).then((hands) => {
-          console.log("hands: ", hands);
           hands?.forEach((hand) => {
             const keypoints = hand.keypoints;
             drawHand(keypoints);
@@ -103,7 +104,13 @@ export default function HandOverlay(props) {
     );
 
     if (dist < 15) {
-      props.clickCallback(pointerCoordinate); // returns {x: __, y: __}
+      props.hoverCallback(pointerCoordinate); // returns {x: __, y: __}
+      setClicking(true);
+    } else {
+      if (clicking) {
+        props.clickCallback(pointerCoordinate);
+      }
+      setClicking(false);
     }
   };
 
