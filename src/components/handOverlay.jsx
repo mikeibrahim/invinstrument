@@ -108,7 +108,11 @@ export default function HandOverlay(props) {
             drawHandConnections(keypoints);
             drawHand(keypoints);
             detectPinch(keypoints);
-            detectFingerDown(keypoints, i, keyCooldown);
+            detectFingerDown(
+              keypoints,
+              hand.handedness === "Right",
+              keyCooldown
+            );
             console.log(keyCooldown);
           });
         });
