@@ -83,7 +83,7 @@ export default function HandOverlay(props) {
 
   const video = document.getElementById("video");
   const canvas = React.createRef();
-  console.log("currentKeyCooldown", currentKeyCooldown);
+  // console.log("currentKeyCooldown", currentKeyCooldown);
 
   if (!detector) {
     const model = handPoseDetection.SupportedModels.MediaPipeHands;
