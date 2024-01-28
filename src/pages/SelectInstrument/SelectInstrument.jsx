@@ -42,7 +42,7 @@ export default function SelectInstrument() {
             : <div id="back-circle" className="btn">
                 <img src={LEFT_ARROW} ref={btns[2].ref} className={btns[2].hover[0] ? "instrument-hover" : ""} alt="back" id="back" onClick={() => setInstrument("menu")}></img>
             </div>}
-        <OpenSheetMusicDisplay file="test.xml" />
+        {instrument === "piano" ? <OpenSheetMusicDisplay file="./test.xml" /> : null}
         <HandOverlay hoverCallback={({ x, y }) => {
             btns.forEach(b => {
                 if (!b.ref.current) return

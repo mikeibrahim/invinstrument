@@ -135,7 +135,7 @@ export default function HandOverlay(props) {
     }
   };
 
-  const detectFingerDown = (keypoints) => {};
+  const detectFingerDown = (keypoints) => { };
 
   return (
     <canvas
