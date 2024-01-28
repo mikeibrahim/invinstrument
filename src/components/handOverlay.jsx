@@ -30,6 +30,37 @@ const handKey = {
   pinky_finger_tip: 20,
 };
 
+const fingerTips = [
+  handKey.thumb_tip,
+  handKey.index_finger_tip,
+  handKey.middle_finger_tip,
+  handKey.ring_finger_tip,
+  handKey.pinky_finger_tip,
+];
+
+const connections = [
+  [handKey.wrist, handKey.thumb_cmc],
+  [handKey.thumb_cmc, handKey.thumb_mcp],
+  [handKey.thumb_mcp, handKey.thumb_ip],
+  [handKey.thumb_ip, handKey.thumb_tip],
+  [handKey.wrist, handKey.index_finger_mcp],
+  [handKey.index_finger_mcp, handKey.index_finger_pip],
+  [handKey.index_finger_pip, handKey.index_finger_dip],
+  [handKey.index_finger_dip, handKey.index_finger_tip],
+  [handKey.wrist, handKey.middle_finger_mcp],
+  [handKey.middle_finger_mcp, handKey.middle_finger_pip],
+  [handKey.middle_finger_pip, handKey.middle_finger_dip],
+  [handKey.middle_finger_dip, handKey.middle_finger_tip],
+  [handKey.wrist, handKey.ring_finger_mcp],
+  [handKey.ring_finger_mcp, handKey.ring_finger_pip],
+  [handKey.ring_finger_pip, handKey.ring_finger_dip],
+  [handKey.ring_finger_dip, handKey.ring_finger_tip],
+  [handKey.wrist, handKey.pinky_finger_mcp],
+  [handKey.pinky_finger_mcp, handKey.pinky_finger_pip],
+  [handKey.pinky_finger_pip, handKey.pinky_finger_dip],
+  [handKey.pinky_finger_dip, handKey.pinky_finger_tip],
+];
+
 export default function HandOverlay(props) {
   const [detector, setDetector] = useState(null);
   const [size, setSize] = useState({ x: 0, y: 0 });
@@ -73,6 +104,7 @@ export default function HandOverlay(props) {
         detector.estimateHands(video).then((hands) => {
           hands?.forEach((hand, i) => {
             const keypoints = hand.keypoints;
+            drawHandConnections(keypoints);
             drawHand(keypoints);
             detectPinch(keypoints);
             detectFingerDown(keypoints, i);
@@ -98,6 +130,8 @@ export default function HandOverlay(props) {
     let radius = 15;
 
     for (let i = 0; i < keypoints.length; i++) {
+      if (!fingerTips.includes(i)) continue;
+
       let circle = new Path2D(); // <<< Declaration
       circle.arc(
         (keypoints[i].x / video.videoWidth) * size.x,
@@ -109,6 +143,24 @@ export default function HandOverlay(props) {
       );
       ctx.fill(circle); //   <<< pass circle to context
     }
+  };
+
+  const drawHandConnections = (keypoints) => {
+    connections.forEach((connection) => {
+      const ctx = canvas.current.getContext("2d");
+      ctx.strokeStyle = "#484b89";
+      ctx.lineWidth = 30;
+      ctx.beginPath();
+      ctx.moveTo(
+        (keypoints[connection[0]].x / video.videoWidth) * size.x,
+        (keypoints[connection[0]].y / video.videoHeight) * size.y
+      );
+      ctx.lineTo(
+        (keypoints[connection[1]].x / video.videoWidth) * size.x,
+        (keypoints[connection[1]].y / video.videoHeight) * size.y
+      );
+      ctx.stroke();
+    });
   };
 
   const detectPinch = (keypoints) => {
@@ -149,43 +201,28 @@ export default function HandOverlay(props) {
   };
 
   const detectFingerDown = (keypoints, handNumber) => {
-    const fingerKeys = [
-      handKey.thumb_tip,
-      handKey.index_finger_tip,
-      handKey.middle_finger_tip,
-      handKey.ring_finger_tip,
-      handKey.pinky_finger_tip,
-    ];
+    const prevFingerPositions = prevHandPos;
 
-    const prevFingerPositions = [
-      { x: null, y: null },
-      { x: null, y: null },
-      { x: null, y: null },
-      { x: null, y: null },
-      { x: null, y: null },
-      { x: null, y: null },
-      { x: null, y: null },
-      { x: null, y: null },
-      { x: null, y: null },
-      { x: null, y: null },
-    ];
-
-    fingerKeys.forEach((fingerKey, i) => {
+    fingerTips.forEach((fingerKey, i) => {
       const finger = keypoints[fingerKey];
-      const prevFinger = prevHandPos[i];
+      const prevFinger = prevHandPos[i + 5 * handNumber];
+      // const wrist = keypoints[handKey.wrist];
 
       if (prevFinger.x) {
         const deltax = finger.x - prevFinger.x;
         const deltay = finger.y - prevFinger.y;
-        if (deltay > 25) {
-          console.log("CLICK: ", i);
+        // if (handNumber === 0 && i === 0) {
+        //   console.log(deltay);
+        // }
+        if (deltay > 20) {
+          console.log("CLICK: ", i + 5 * handNumber);
         }
       }
 
-      prevFingerPositions.push({
+      prevFingerPositions[handNumber * 5 + i] = {
         x: keypoints[fingerKey].x,
         y: keypoints[fingerKey].y,
-      });
+      };
     });
 
     setPrevHandPos(prevFingerPositions);
