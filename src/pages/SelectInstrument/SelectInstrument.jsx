@@ -22,6 +22,6 @@ export default function SelectInstrument() {
                 {instruments.map(data =>
                     <img class="instrument-img" src={data.image} alt={data.name} onClick={() => setInstrument(data.name)} />)}
             </div>
-            : <img src={LEFT_ARROW} alt="back" onClick={() => setInstrument("menu")}></img>}
+            : <img src={LEFT_ARROW} alt="back" id="back" onClick={() => setInstrument("menu")}></img>}
     </>
 }
