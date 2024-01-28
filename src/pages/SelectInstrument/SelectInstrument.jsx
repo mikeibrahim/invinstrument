@@ -33,8 +33,8 @@ export default function SelectInstrument() {
     }]
 
     const NOTE_MAP = {
-        1: "D4", 2: "E4", 3: "F4", 4: "G4", 5: "A4",
-        6: "G3", 7: "A3", 8: "B3", 9: "B3", 10: "C4"
+        1: "E3", 2: "F3", 3: "G3", 4: "A4", 5: "B4",
+        6: "G2", 7: "A3", 8: "B3", 9: "C3", 10: "D3"
     }
 
     let osmd;
