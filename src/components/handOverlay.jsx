@@ -114,7 +114,6 @@ export default function HandOverlay(props) {
       pointerCoordinate3D.y,
       pointerCoordinate3D.z
     );
-    console.log("distance:", dist);
 
     thumbCoordinate.x =
       (thumbCoordinate.x / video.videoWidth) * document.body.clientWidth;
@@ -143,7 +142,7 @@ export default function HandOverlay(props) {
     }
   };
 
-  const detectFingerDown = (keypoints) => {};
+  const detectFingerDown = (keypoints) => { };
 
   return (
     <canvas
