@@ -29,7 +29,7 @@ export default function Main() {
         isPlaying={isPlaying}
       />
 
-      {/* <AR /> */}
+      <AR />
     </div>
   );
 }
