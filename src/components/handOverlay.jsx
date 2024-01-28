@@ -122,12 +122,14 @@ export default function HandOverlay(props) {
 
     if (dist < 15) {
       props.hoverCallback(pointerCoordinate); // returns {x: __, y: __}
-      setClicking(true);
-    } else {
+      if (!clicking) {
+        setClicking(true);
+      }
+    } else if (dist > 30) {
       if (clicking) {
         props.clickCallback(pointerCoordinate);
+        setClicking(false);
       }
-      setClicking(false);
     }
   };
 
