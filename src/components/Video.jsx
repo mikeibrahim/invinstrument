@@ -4,15 +4,13 @@ const constraints = {
   audio: false,
   video: {
     // aspectRatio: window.screen.width / window.screen.height,
-    width: document.body.clientWidth,
+    // width: document.body.clientWidth,
     // height: window.screen.height,
-    facingMode: "environment", // or 'environment'
-    // deviceId: {
-    //   exact: "1d257b7114c6784b7da15efb068ce2976cc5eb3e3c62268255805c50c1fbe5f3",
-    // }, // webcam
+    // facingMode: "environment", // or 'environment'
     deviceId: {
-      exact: "4a219b2d248c56c039e55cb378188fef9514fb8be5eb3731472bcb74352185ea",
-    }, // mac
+      exact: "1d257b7114c6784b7da15efb068ce2976cc5eb3e3c62268255805c50c1fbe5f3",
+      // exact: "4a219b2d248c56c039e55cb378188fef9514fb8be5eb3731472bcb74352185ea",
+    },
   },
 };
 
@@ -40,6 +38,7 @@ export default function Video(props) {
     navigator.mediaDevices
       .getUserMedia(constraints)
       .then((stream) => {
+        console.log("stream: ", stream);
         if (video.current && !video.current.srcObject) {
           video.current.srcObject = stream;
         }
