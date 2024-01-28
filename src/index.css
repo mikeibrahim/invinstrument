@@ -60,4 +60,6 @@ code {
   top: 0;
   height: 100vh;
   z-index: -1;
+  left: 50vw;
+  transform: translateX(-50%);
 }
