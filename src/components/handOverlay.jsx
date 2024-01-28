@@ -51,9 +51,6 @@ export default function HandOverlay(props) {
 
   useEffect(() => {
     let intervalId;
-    console.log("video", video);
-    console.log("detector", detector);
-    console.log("props.isPlaying", props.isPlaying);
     if (video && detector && props.isPlaying) {
       if (size.x === 0) {
         setSize({ x: video.offsetWidth, y: video.offsetHeight });
@@ -81,7 +78,6 @@ export default function HandOverlay(props) {
   };
 
   const drawHand = (keypoints) => {
-    console.log("drawing hands");
     if (!(canvas.current && keypoints)) return;
     const ctx = canvas.current.getContext("2d");
     ctx.fillStyle = "blue";

@@ -9,7 +9,7 @@ export default function AR(props) {
     >
       <a-marker type="pattern" url="/marker.patt">
         {/* <a-box position="0 0.5 0" material="color: red;"></a-box> */}
-        <a-entity obj-model="obj: url(/piano.obj);" scale="10 10 10"></a-entity>
+        <a-entity obj-model="fbx: url(/piano.fbx);" scale="10 10 10"></a-entity>
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
