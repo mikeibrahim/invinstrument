@@ -75,5 +75,5 @@ export default function HandOverlay(props) {
     }
   };
 
-  return <canvas ref={canvas} width={document.body.clientWidth}></canvas>;
+  return <canvas ref={canvas} width={500} height={500}></canvas>;
 }

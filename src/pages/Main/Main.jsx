@@ -11,7 +11,13 @@ export default function Main() {
 
   return (
     <div>
-      <Video width={document.body.clientWidth} playCallback={playCallback} />
+      <Video
+        deviceId={
+          "1d257b7114c6784b7da15efb068ce2976cc5eb3e3c62268255805c50c1fbe5f3"
+        }
+        width={document.body.clientWidth}
+        playCallback={playCallback}
+      />
       <HandOverlay isPlaying={isPlaying} />
     </div>
   );

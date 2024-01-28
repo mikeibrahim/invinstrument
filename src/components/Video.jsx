@@ -12,8 +12,9 @@ export default function Video(props) {
       // height: window.screen.height,
       // facingMode: "environment", // or 'environment'
       deviceId: {
-        exact:
-          "1d257b7114c6784b7da15efb068ce2976cc5eb3e3c62268255805c50c1fbe5f3",
+        exact: props.deviceId,
+        // exact:
+        //   "1d257b7114c6784b7da15efb068ce2976cc5eb3e3c62268255805c50c1fbe5f3",
         // exact: "4a219b2d248c56c039e55cb378188fef9514fb8be5eb3731472bcb74352185ea",
       },
     },
