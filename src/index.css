@@ -54,3 +54,10 @@ code {
   transform: scale(1.2);
   transition: all 0.25s;
 }
+
+#video {
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  z-index: -1;
+}

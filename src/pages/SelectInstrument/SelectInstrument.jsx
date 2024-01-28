@@ -17,6 +17,7 @@ export default function SelectInstrument() {
         }
     ]
     return <>
+        <Video width={document.body.clientWidth} />
         <title id="title">{instrument === "menu" ? "SELECT AN INSTRUMENT" : "PLAY"}</title>
         {instrument === "menu"
             ? <div id="instruments">
@@ -26,6 +27,5 @@ export default function SelectInstrument() {
             : <>
                 <img src={LEFT_ARROW} alt="back" id="back" className="btn" onClick={() => setInstrument("menu")}></img>
             </>}
-        <Video width={document.body.clientWidth} />
     </>
 }
