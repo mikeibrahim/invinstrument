@@ -6,42 +6,48 @@ import Video from "../../components/Video";
 import HandOverlay from "../../components/HandOverlay";
 
 export default function SelectInstrument() {
+    const [isPlaying, setIsPlaying] = useState(false);
+    const playCallback = () => setIsPlaying(true);
+
     const [instrument, setInstrument] = useState("menu")
     const instruments = [
         {
-            "name": "piano",
-            "image": PIANO,
-            "ref": useRef(null),
-            // "state"
+            name: "piano",
+            image: PIANO,
+            ref: useRef(null),
+            hover: useState(false)
         },
         {
-            "name": "guitar",
-            "image": GUITAR,
-            "ref": useRef(null)
+            name: "guitar",
+            image: GUITAR,
+            ref: useRef(null),
+            hover: useState(false)
         }
     ]
     return <>
-        <Video width={document.body.clientWidth} />
+        <Video width={document.body.clientWidth} playCallback={playCallback} />
         <nav id="nav">
             <title id="title">{instrument === "menu" ? "SELECT AN INSTRUMENT" : "PLAY"}</title>
         </nav>
         {instrument === "menu"
             ? <div id="instruments">
                 {instruments.map((data, i) =>
-                    <img ref={data.ref} className="instrument-img btn" key={i} src={data.image} alt={data.name} onClick={() => setInstrument(data.name)} />)}
+                    <img ref={data.ref} className={"instrument-img btn" + (data.hover[0] ? " instrument-hover" : "")} key={i} src={data.image} alt={data.name} onClick={() => setInstrument(data.name)} />)}
             </div>
             : <div id="back-circle" className="btn">
                 <img src={LEFT_ARROW} alt="back" id="back" onClick={() => setInstrument("menu")}></img>
             </div>}
-        {/* <HandOverlay hoverCallback={(x, y) => {
+        <HandOverlay hoverCallback={(x, y) => {
             instruments.forEach(i => {
                 const el = i.ref.current;
+                console.log(el)
                 if (
                     el.x <= x && x <= el.x + el.width &&
                     el.y <= y && y <= el.y + el.height
-                ) setHover(true)
+                ) el.hover[1](true)
+                else el.hover[1](false)
             })
-        }} clickCallback={
+        }} clickCallback={(x, y) => {
             instruments.forEach(i => {
                 const el = i.ref.current;
                 if (
@@ -49,6 +55,6 @@ export default function SelectInstrument() {
                     el.y <= y && y <= el.y + el.height
                 ) setInstrument(i.name)
             })
-        } isPlaying={ } /> */}
+        }} isPlaying={isPlaying} />
     </>
 }
