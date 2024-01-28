@@ -34,8 +34,8 @@ export default function SelectInstrument() {
     // 10-6 = left hand
     // 1-5 = right hand
     const NOTE_MAP = {
-        10: "E3", 9: "F3", 8: "G3", 7: "A4", 6: "B4",
-        1: "G2", 2: "A3", 3: "B3", 4: "C3", 5: "D3"
+        10: "G2", 9: "A3", 8: "B3", 7: "C3", 6: "D3",
+        1: "E3", 2: "F3", 3: "G3", 4: "A4", 5: "B4"
     }
 
     let osmd;
