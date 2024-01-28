@@ -11,7 +11,8 @@ export default function SelectInstrument() {
         {
             "name": "piano",
             "image": PIANO,
-            "ref": useRef(null)
+            "ref": useRef(null),
+            // "state"
         },
         {
             "name": "guitar",
@@ -38,7 +39,7 @@ export default function SelectInstrument() {
                 if (
                     el.x <= x && x <= el.x + el.width &&
                     el.y <= y && y <= el.y + el.height
-                ) i.ref.current.
+                ) setHover(true)
             })
         }} clickCallback={
             instruments.forEach(i => {
