@@ -90,15 +90,6 @@ a-marker {
   transition: all 0.25s;
 }
 
-/* #video {
-  position: absolute;
-  top: 0;
-  height: 100vh;
-  z-index: -1;
-  left: 50vw;
-  transform: translateX(-50%);
-} */
-
 #video,
 #hand-canvas {
   position: absolute;
