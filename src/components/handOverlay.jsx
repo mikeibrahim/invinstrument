@@ -77,6 +77,7 @@ export default function HandOverlay(props) {
     { x: null, y: null },
   ]);
   let [clicking, setClicking] = useState(false);
+  const [keyCooldown, setKeyCooldown] = useState(0);
 
   const video = document.getElementById("video");
   const canvas = React.createRef();
@@ -95,7 +96,7 @@ export default function HandOverlay(props) {
 
   useEffect(() => {
     let intervalId;
-    if (video && detector && props.isPlaying) {
+    if (video && detector && props.isPlaying && canvas.current) {
       if (size.x === 0) {
         setSize({ x: video.offsetWidth, y: video.offsetHeight });
       }
@@ -107,7 +108,8 @@ export default function HandOverlay(props) {
             drawHandConnections(keypoints);
             drawHand(keypoints);
             detectPinch(keypoints);
-            detectFingerDown(keypoints, i);
+            detectFingerDown(keypoints, i, keyCooldown);
+            console.log(keyCooldown);
           });
         });
       }, 10);
@@ -147,7 +149,10 @@ export default function HandOverlay(props) {
 
   const drawHandConnections = (keypoints) => {
     connections.forEach((connection) => {
-      const ctx = canvas.current.getContext("2d");
+      const ctx = canvas?.current?.getContext("2d");
+      if (!ctx) {
+        return;
+      }
       ctx.strokeStyle = "#484b89";
       ctx.lineWidth = 30;
       ctx.beginPath();
@@ -200,7 +205,7 @@ export default function HandOverlay(props) {
     }
   };
 
-  const detectFingerDown = (keypoints, handNumber) => {
+  const detectFingerDown = (keypoints, handNumber, cooldown) => {
     const prevFingerPositions = prevHandPos;
 
     fingerTips.forEach((fingerKey, i) => {
@@ -214,9 +219,10 @@ export default function HandOverlay(props) {
         // if (handNumber === 0 && i === 0) {
         //   console.log(deltay);
         // }
-        if (deltay > 20) {
+        if (deltay > 20 && cooldown <= 0) {
           console.log("CLICK: ", i + 5 * handNumber + 1);
           props.keypressCallback(i + 5 * handNumber + 1);
+          cooldown = 0.5;
         }
       }
 
@@ -227,6 +233,7 @@ export default function HandOverlay(props) {
     });
 
     setPrevHandPos(prevFingerPositions);
+    setKeyCooldown(cooldown - 0.1);
   };
 
   return (
