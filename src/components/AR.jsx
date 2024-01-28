@@ -12,7 +12,7 @@ export default function AR(props) {
         {/* <a-box click-listener-component></a-box> */}
         <a-entity
           // class="clickable"
-          obj-model="obj: url(/piano2.obj); mtl: url(/piano2.mtl)"
+          obj-model="obj: url(/piano4.obj); mtl: url(/piano4.mtl)"
           scale="10 10 10"
           position="0 1 0"
         ></a-entity>

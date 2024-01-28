@@ -227,7 +227,7 @@ export default function HandOverlay(props) {
         // if (handNumber === 0 && i === 0) {
         //   console.log(deltay);
         // }
-        if (deltay > 20 && cooldown <= 0) {
+        if (deltay > 15 && cooldown <= 0) {
           console.log("CLICK: ", i + 5 * handNumber + 1);
           props.keypressCallback(i + 5 * handNumber + 1);
           currentKeyCooldown = 0.5;
