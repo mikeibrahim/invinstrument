@@ -20,7 +20,7 @@ export default function Main() {
         }
         playCallback={playCallback}
       />
-      {/* <AR /> */}
+      <AR />
       <HandOverlay
         clickCallback={clickCallback}
         hoverCallback={() => {}}
