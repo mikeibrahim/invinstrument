@@ -121,4 +121,5 @@ a-marker {
   position: absolute;
   top: 50vh;
   left: 0;
+  transform: translateY(-25%);
 }
