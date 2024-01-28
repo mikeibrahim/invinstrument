@@ -46,7 +46,7 @@ class OpenSheetMusicDisplay extends Component {
   }
 
   render() {
-    return (<div ref={this.divRef} />);
+    return <div ref={this.divRef} />;
   }
 }
 
