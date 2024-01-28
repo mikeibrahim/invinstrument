@@ -10,6 +10,7 @@ a-scene {
   width: 100vw !important;
   height: calc(100vw / 1.333) !important;
   top: 50vh;
+  position: absolute;
   transform: translateY(-50%);
 }
 
@@ -27,6 +28,9 @@ a-marker {
   display: flex;
   justify-content: center;
   padding: 50px;
+  position: absolute;
+  width: 100%;
+  top: 0;
 }
 
 #title {
