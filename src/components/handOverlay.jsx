@@ -77,10 +77,13 @@ export default function HandOverlay(props) {
     { x: null, y: null },
   ]);
   let [clicking, setClicking] = useState(false);
-  const [keyCooldown, setKeyCooldown] = useState(0);
+  const [keyCooldown, setKeyCooldown] = useState(2);
+  let currentKeyCooldown = keyCooldown;
+  let currentPrevHandPos = prevHandPos;
 
   const video = document.getElementById("video");
   const canvas = React.createRef();
+  console.log("currentKeyCooldown", currentKeyCooldown);
 
   if (!detector) {
     const model = handPoseDetection.SupportedModels.MediaPipeHands;
@@ -111,10 +114,13 @@ export default function HandOverlay(props) {
             detectFingerDown(
               keypoints,
               hand.handedness === "Right",
-              keyCooldown
+              currentKeyCooldown
             );
-            console.log(keyCooldown);
+            // console.log(keyCooldown);
           });
+          currentKeyCooldown -= 0.1;
+          setKeyCooldown(currentKeyCooldown);
+          setPrevHandPos(currentPrevHandPos);
         });
       }, 10);
     } else {
@@ -210,8 +216,6 @@ export default function HandOverlay(props) {
   };
 
   const detectFingerDown = (keypoints, handNumber, cooldown) => {
-    const prevFingerPositions = prevHandPos;
-
     fingerTips.forEach((fingerKey, i) => {
       const finger = keypoints[fingerKey];
       const prevFinger = prevHandPos[i + 5 * handNumber];
@@ -226,18 +230,16 @@ export default function HandOverlay(props) {
         if (deltay > 20 && cooldown <= 0) {
           console.log("CLICK: ", i + 5 * handNumber + 1);
           props.keypressCallback(i + 5 * handNumber + 1);
+          currentKeyCooldown = 0.5;
           cooldown = 0.5;
         }
       }
 
-      prevFingerPositions[handNumber * 5 + i] = {
+      currentPrevHandPos[handNumber * 5 + i] = {
         x: keypoints[fingerKey].x,
         y: keypoints[fingerKey].y,
       };
     });
-
-    setPrevHandPos(prevFingerPositions);
-    setKeyCooldown(cooldown - 0.1);
   };
 
   return (
