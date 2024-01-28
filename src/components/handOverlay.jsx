@@ -215,7 +215,8 @@ export default function HandOverlay(props) {
         //   console.log(deltay);
         // }
         if (deltay > 20) {
-          console.log("CLICK: ", i + 5 * handNumber);
+          console.log("CLICK: ", i + 5 * handNumber + 1);
+          props.keypressCallback(i + 5 * handNumber + 1);
         }
       }
 
