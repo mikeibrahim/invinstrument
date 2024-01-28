@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, createRef } from "react";
+import React, { useState } from "react";
 import Video from "../../components/Video.jsx";
 import HandOverlay from "../../components/HandOverlay.jsx";
 
