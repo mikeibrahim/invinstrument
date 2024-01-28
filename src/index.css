@@ -23,20 +23,15 @@ a-scene {
   margin: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+#nav {
+  display: flex;
+  justify-content: center;
+  padding: 50px;
 }
 
 #title {
   display: block;
-  position: absolute;
-  top: 0;
-  left: 50vw;
-  transform: translateX(-50%);
-  text-align: center;
   padding: 25px 40px;
-  margin: 50px;
   border-radius: 50px;
   font-weight: 600;
   font-size: 40pt;
@@ -63,7 +58,7 @@ code {
 }
 
 #back {
-  height: 80px;
+  height: 70px;
 }
 
 #back-circle {

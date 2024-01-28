@@ -15,7 +15,7 @@ export default function Video(props) {
 
   const playVideo = () => {
     video.current.play();
-    props.playCallback();
+    // props.playCallback();
   };
 
   navigator.mediaDevices.enumerateDevices().then((devices) => {
