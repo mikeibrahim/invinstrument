@@ -13,10 +13,10 @@ a-scene {
   transform: translateY(-50%);
 }
 
-/* a-marker {
+a-marker {
   width: 100% !important;
   height: 100% !important;
-} */
+}
 
 * {
   font-family: "Fredoka", sans-serif;

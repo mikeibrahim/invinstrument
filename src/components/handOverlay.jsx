@@ -61,9 +61,8 @@ export default function HandOverlay(props) {
         detector.estimateHands(video).then((hands) => {
           hands?.forEach((hand) => {
             const keypoints = hand.keypoints;
-            const keypoints3D = hand.keypoints3D;
             drawHand(keypoints);
-            detectPinch(keypoints, keypoints3D);
+            detectPinch(keypoints);
             detectFingerDown(keypoints);
           });
         });
@@ -100,21 +99,16 @@ export default function HandOverlay(props) {
     }
   };
 
-  const detectPinch = (keypoints, keypoints3D) => {
+  const detectPinch = (keypoints) => {
     const thumbCoordinate = keypoints[handKey.thumb_tip];
     const pointerCoordinate = keypoints[handKey.index_finger_tip];
-    const thumbCoordinate3D = keypoints3D[handKey.thumb_tip];
-    const pointerCoordinate3D = keypoints3D[handKey.index_finger_tip];
 
-    const dist = distance3D(
-      thumbCoordinate3D.x,
-      thumbCoordinate3D.y,
-      thumbCoordinate3D.z,
-      pointerCoordinate3D.x,
-      pointerCoordinate3D.y,
-      pointerCoordinate3D.z
+    const dist = distance(
+      thumbCoordinate.x,
+      thumbCoordinate.y,
+      pointerCoordinate.x,
+      pointerCoordinate.y
     );
-    console.log("distance:", dist);
 
     thumbCoordinate.x =
       (thumbCoordinate.x / video.videoWidth) * document.body.clientWidth;
@@ -128,16 +122,14 @@ export default function HandOverlay(props) {
     pointerCoordinate.y +=
       (document.body.clientHeight - video.getBoundingClientRect().height) / 2;
 
-    if (dist < 0.02) {
+    if (dist < 15) {
       props.hoverCallback(pointerCoordinate); // returns {x: __, y: __}
-      console.log("hovering");
       if (!clicking) {
         setClicking(true);
       }
-    } else if (dist > 0.05) {
+    } else if (dist > 30) {
       if (clicking) {
         props.clickCallback(pointerCoordinate);
-        console.log("clicking");
         setClicking(false);
       }
     }
