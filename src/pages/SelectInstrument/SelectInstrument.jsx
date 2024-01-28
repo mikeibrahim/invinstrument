@@ -26,6 +26,6 @@ export default function SelectInstrument() {
             : <>
                 <img src={LEFT_ARROW} alt="back" id="back" className="btn" onClick={() => setInstrument("menu")}></img>
             </>}
-        <Video width={document.body.clientWidth} height={document.body.clientHeight} />
+        <Video width={document.body.clientWidth} />
     </>
 }
