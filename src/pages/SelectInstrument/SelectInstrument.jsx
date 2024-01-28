@@ -11,15 +11,22 @@ export default function SelectInstrument() {
 
     const [instrument, setInstrument] = useState("menu")
     const instruments = [
+        { name: "piano", image: PIANO },
+        { name: "guitar", image: GUITAR }
+    ]
+    const btns = [
         {
-            name: "piano",
-            image: PIANO,
+            onClick: setInstrument("piano"),
             ref: useRef(null),
             hover: useState(false)
         },
         {
-            name: "guitar",
-            image: GUITAR,
+            onClick: setInstrument("guitar"),
+            ref: useRef(null),
+            hover: useState(false)
+        },
+        {
+            onClick: setInstrument("menu"),
             ref: useRef(null),
             hover: useState(false)
         }
@@ -32,30 +39,30 @@ export default function SelectInstrument() {
         {instrument === "menu"
             ? <div id="instruments">
                 {instruments.map((data, i) =>
-                    <img ref={data.ref} className={"instrument-img btn" + (data.hover[0] ? " instrument-hover" : "")} key={i} src={data.image} alt={data.name} onClick={() => setInstrument(data.name)} />)}
+                    <img ref={btns[i].ref} className={"instrument-img btn" + (btns[i].hover[0] ? " instrument-hover" : "")} key={i} src={data.image} alt={data.name} onClick={() => setInstrument(data.name)} />)}
             </div>
             : <div id="back-circle" className="btn">
-                <img src={LEFT_ARROW} alt="back" id="back" onClick={() => setInstrument("menu")}></img>
+                <img src={LEFT_ARROW} ref={btns[2].ref} className={btns[2].hover[0] ? "instrument-hover" : ""} alt="back" id="back" onClick={() => setInstrument("menu")}></img>
             </div>}
         <HandOverlay hoverCallback={({ x, y }) => {
-            instruments.forEach(i => {
-                const el = i.ref.current;
-                console.log(i.hover);
-                if (
-                    el.x <= x && x <= el.x + el.width &&
-                    el.y <= y && y <= el.y + el.height
-                ) i.hover[1](true)
-                else i.hover[1](false)
-            })
-        }} clickCallback={({ x, y }) => {
-            console.log("pinch:", x, y)
-            instruments.forEach(i => {
-                const rect = i.ref.current.getBoundingClientRect();
-                console.log("rect:", rect, rect.left, rect.right, rect.top, rect.bottom)
+            btns.forEach(b => {
+                const rect = b.ref.current.getBoundingClientRect();
+                console.log(b.hover);
                 if (
                     rect.left <= x && x <= rect.right &&
                     rect.top <= y && y <= rect.bottom
-                ) setInstrument(i.name)
+                ) b.hover[1](true)
+                else b.hover[1](false)
+            })
+        }} clickCallback={({ x, y }) => {
+            console.log("pinch:", x, y)
+            btns.forEach(b => {
+                const rect = b.ref.current.getBoundingClientRect();
+                // console.log("rect:", rect, rect.left, rect.right, rect.top, rect.bottom)
+                if (
+                    rect.left <= x && x <= rect.right &&
+                    rect.top <= y && y <= rect.bottom
+                ) b.onClick()
             })
         }} isPlaying={isPlaying} />
     </>
