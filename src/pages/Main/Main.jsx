@@ -11,7 +11,7 @@ export default function Main() {
 
   return (
     <div>
-      <Video playCallback={playCallback} />
+      <Video width={document.body.clientWidth} playCallback={playCallback} />
       <HandOverlay isPlaying={isPlaying} />
     </div>
   );
