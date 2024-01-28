@@ -59,8 +59,8 @@ export default function SelectInstrument() {
             : <div id="back-circle" className="btn">
                 <img src={LEFT_ARROW} ref={btns[2].ref} className={btns[2].hover[0] ? "instrument-hover" : ""} alt="back" id="back" onClick={() => setInstrument("menu")}></img>
             </div>}
-        {/* {instrument === "piano" ? <OpenSheetMusicDisplay file="happy-bday.xml" /> : null} */}
-        <OpenSheetMusicDisplay setupOsmd={setupOsmd} file="happy-bday.xml" />
+        {instrument === "piano" ? <OpenSheetMusicDisplay setupOsmd={setupOsmd} file="happy-bday.xml" /> : null}
+        {/* <OpenSheetMusicDisplay setupOsmd={setupOsmd} file="happy-bday.xml" /> */}
         <HandOverlay hoverCallback={({ x, y }) => {
             btns.forEach(b => {
                 if (!b.ref.current) return
@@ -87,8 +87,10 @@ export default function SelectInstrument() {
                 }
             })
         }} keypressCallback={(finger) => {
+            if (instrument === "menu") return
             np.buildFromName(NOTE_MAP[finger]).play()
             osmd.cursor.next()
+            console.log(NOTE_MAP[finger])
         }} isPlaying={isPlaying} />
     </>
 }
