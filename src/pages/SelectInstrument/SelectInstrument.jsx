@@ -5,23 +5,11 @@ import LEFT_ARROW from './left-arrow.png'
 import Video from "../../components/Video"
 import HandOverlay from "../../components/HandOverlay"
 import np from "noteplayer"
+import OpenSheetMusicDisplay from "./OpenSheetMusicDisplay"
 
 export default function SelectInstrument() {
     const [isPlaying, setIsPlaying] = useState(false)
     const playCallback = () => setIsPlaying(true)
-
-    // osmd.setOptions({
-    //     backend: "svg",
-    //     drawTitle: true,
-    //     // drawingParameters: "compacttight" // don't display title, composer etc., smaller margins
-    // });
-    // osmd
-    //     .load("http://downloads2.makemusic.com/musicxml/MozaVeilSample.xml")
-    //     .then(
-    //         function () {
-    //             osmd.render();
-    //         }
-    //     );
 
     const [instrument, setInstrument] = useState("menu")
     const instruments = [
@@ -54,6 +42,7 @@ export default function SelectInstrument() {
             : <div id="back-circle" className="btn">
                 <img src={LEFT_ARROW} ref={btns[2].ref} className={btns[2].hover[0] ? "instrument-hover" : ""} alt="back" id="back" onClick={() => setInstrument("menu")}></img>
             </div>}
+        <OpenSheetMusicDisplay file="test.xml" />
         <HandOverlay hoverCallback={({ x, y }) => {
             btns.forEach(b => {
                 if (!b.ref.current) return
