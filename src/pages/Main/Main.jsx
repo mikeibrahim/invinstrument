@@ -13,9 +13,9 @@ export default function Main() {
     <div>
       <Video
         deviceId={
-          "1d257b7114c6784b7da15efb068ce2976cc5eb3e3c62268255805c50c1fbe5f3"
+          "1d257b7114c6784b7da15efb068ce2976cc5eb3e3c62268255805c50c1fbe5f3" // iphone
+          // "4a219b2d248c56c039e55cb378188fef9514fb8be5eb3731472bcb74352185ea" // mac
         }
-        width={document.body.clientWidth}
         playCallback={playCallback}
       />
       <HandOverlay isPlaying={isPlaying} />

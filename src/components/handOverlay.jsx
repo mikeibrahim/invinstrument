@@ -2,7 +2,7 @@ import "@tensorflow/tfjs-backend-webgl";
 // import * as mpHands from "@mediapipe/hands";
 
 import * as handPoseDetection from "@tensorflow-models/hand-pose-detection";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const key = {
   wrist: 0,
@@ -29,7 +29,8 @@ const key = {
 };
 
 export default function HandOverlay(props) {
-  const [detector, setDetector] = React.useState(null);
+  const [detector, setDetector] = useState(null);
+  const [size, setSize] = useState({ x: 0, y: 0 });
   const video = document.getElementById("video");
   const canvas = React.createRef();
 
@@ -49,6 +50,11 @@ export default function HandOverlay(props) {
     let intervalId;
 
     if (video && detector && props.isPlaying) {
+      if (size.x === 0) {
+        console.log("setHeight: ", { x: video.width, y: video.height });
+        console.log("video: ", video);
+        setSize({ x: video.width, y: video.height });
+      }
       intervalId = setInterval(() => {
         detector.estimateHands(video).then((value) => {
           const keypoints = value[0]?.keypoints;
@@ -75,5 +81,5 @@ export default function HandOverlay(props) {
     }
   };
 
-  return <canvas ref={canvas} width={500} height={500}></canvas>;
+  return <canvas ref={canvas} width={size.x} height={size.y}></canvas>;
 }
