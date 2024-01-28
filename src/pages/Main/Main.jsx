@@ -5,10 +5,7 @@ import AR from "../../components/AR.jsx";
 
 export default function Main() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const playCallback = () => {
-    console.log("playing");
-    setIsPlaying(true);
-  };
+  const playCallback = () => setIsPlaying(true);
 
   const clickCallback = (coordinates) => {
     console.log("Clicked: ", coordinates);
@@ -23,13 +20,12 @@ export default function Main() {
         }
         playCallback={playCallback}
       />
+      <AR />
       <HandOverlay
         clickCallback={clickCallback}
         hoverCallback={() => {}}
         isPlaying={isPlaying}
       />
-
-      <AR />
     </div>
   );
 }

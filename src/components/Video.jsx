@@ -15,18 +15,18 @@ export default function Video(props) {
 
   const playVideo = () => {
     video.current.play();
-    // props.playCallback();
+    props.playCallback();
   };
 
-  navigator.mediaDevices.enumerateDevices().then((devices) => {
-    devices.forEach((device) => {
-      if (device.kind === "videoinput") {
-        console.log(device.deviceId);
-        console.log(device.label);
-        console.log(device.kind);
-      }
-    });
-  });
+  // navigator.mediaDevices.enumerateDevices().then((devices) => {
+  //   devices.forEach((device) => {
+  //     if (device.kind === "videoinput") {
+  //       console.log(device.deviceId);
+  //       console.log(device.label);
+  //       console.log(device.kind);
+  //     }
+  //   });
+  // });
 
   if (!navigator.mediaDevices)
     console.log("Sorry, getUserMedia is not supported");
