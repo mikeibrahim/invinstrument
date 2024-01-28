@@ -35,6 +35,8 @@ export default function SelectInstrument() {
         6: "D4", 7: "E4", 8: "F4", 9: "G4", 10: "A4"
     }
 
+    // const osmd = [];
+
     return <>
         <Video width={document.body.clientWidth} playCallback={playCallback} />
         <nav id="nav">
@@ -48,7 +50,8 @@ export default function SelectInstrument() {
             : <div id="back-circle" className="btn">
                 <img src={LEFT_ARROW} ref={btns[2].ref} className={btns[2].hover[0] ? "instrument-hover" : ""} alt="back" id="back" onClick={() => setInstrument("menu")}></img>
             </div>}
-        {instrument === "piano" ? <OpenSheetMusicDisplay file="happy-bday.xml" /> : null}
+        {/* {instrument === "piano" ? <OpenSheetMusicDisplay file="happy-bday.xml" /> : null} */}
+        <OpenSheetMusicDisplay file="happy-bday.xml" />
         <HandOverlay hoverCallback={({ x, y }) => {
             btns.forEach(b => {
                 if (!b.ref.current) return
@@ -74,6 +77,8 @@ export default function SelectInstrument() {
                     b.hover[1](false)
                 }
             })
-        }} keypressCallback={() => np.buildFromName(NOTE_MAP).play()} isPlaying={isPlaying} />
+        }} keypressCallback={(finger) => {
+            np.buildFromName(NOTE_MAP[finger]).play()
+        }} isPlaying={isPlaying} />
     </>
 }
