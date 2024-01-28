@@ -28,6 +28,8 @@ export default function SelectInstrument() {
             : <div id="back-circle" className="btn">
                 <img src={LEFT_ARROW} alt="back" id="back" onClick={() => setInstrument("menu")}></img>
             </div>}
-        <HandOverlay />
+        {/* <HandOverlay hoverCallback={(x, y) => {
+            
+        }} clickCallback={ } isPlaying={ } /> */}
     </>
 }

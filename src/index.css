@@ -41,6 +41,7 @@ code {
   transform: scale(1);
   border-radius: 50px;
   cursor: pointer;
+  height: 250px;
 }
 
 #back {
@@ -84,4 +85,8 @@ code {
   z-index: -1;
   top: 50vh;
   transform: translateY(-50%);
+}
+
+#arjs-video {
+  display: none;
 }
