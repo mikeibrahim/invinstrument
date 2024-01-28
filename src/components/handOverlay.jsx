@@ -51,16 +51,15 @@ export default function HandOverlay(props) {
 
     if (video && detector && props.isPlaying) {
       if (size.x === 0) {
-        console.log("setHeight: ", { x: video.width, y: video.height });
         console.log("video: ", video);
-        setSize({ x: video.width, y: video.height });
+        setSize({ x: video.offsetWidth, y: video.offsetHeight });
       }
       intervalId = setInterval(() => {
         detector.estimateHands(video).then((value) => {
           const keypoints = value[0]?.keypoints;
           drawHand(keypoints);
         });
-      }, 100);
+      }, 10);
     } else {
       clearInterval(intervalId);
     }
@@ -76,10 +75,24 @@ export default function HandOverlay(props) {
 
     for (let i = 0; i < keypoints.length; i++) {
       let circle = new Path2D(); // <<< Declaration
-      circle.arc(keypoints[i].x, keypoints[i].y, radius, 0, 2 * Math.PI, false);
+      circle.arc(
+        (keypoints[i].x / video.videoWidth) * size.x,
+        (keypoints[i].y / video.videoHeight) * size.y,
+        radius,
+        0,
+        2 * Math.PI,
+        false
+      );
       ctx.fill(circle); //   <<< pass circle to context
     }
   };
 
-  return <canvas ref={canvas} width={size.x} height={size.y}></canvas>;
+  return (
+    <canvas
+      id="hand-canvas"
+      ref={canvas}
+      width={size.x}
+      height={size.y}
+    ></canvas>
+  );
 }
