@@ -64,7 +64,7 @@ export default function HandOverlay(props) {
             detectPinch(keypoints);
           });
         });
-      }, 100);
+      }, 10);
     } else {
       clearInterval(intervalId);
     }
@@ -100,14 +100,25 @@ export default function HandOverlay(props) {
   const detectPinch = (keypoints) => {
     const thumbCoordinate = keypoints[handKey.thumb_tip];
     const pointerCoordinate = keypoints[handKey.index_finger_tip];
+
     const dist = distance(
       thumbCoordinate.x,
       thumbCoordinate.y,
       pointerCoordinate.x,
       pointerCoordinate.y
     );
+
+    thumbCoordinate.x =
+      (thumbCoordinate.x / video.videoWidth) * document.body.clientWidth;
+    pointerCoordinate.x =
+      (pointerCoordinate.x / video.videoWidth) * document.body.clientWidth;
+    thumbCoordinate.y =
+      (thumbCoordinate.y / video.videoHeight) * document.body.clientHeight;
+    pointerCoordinate.y =
+      (pointerCoordinate.y / video.videoHeight) * document.body.clientHeight;
+
     pointerCoordinate.y +=
-      (window.screen.height - video.getBoundingClientRect().y) / 2;
+      (document.body.clientHeight - video.getBoundingClientRect().height) / 2;
 
     if (dist < 15) {
       props.hoverCallback(pointerCoordinate); // returns {x: __, y: __}
