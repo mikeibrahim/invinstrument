@@ -37,7 +37,7 @@ code {
 }
 
 .instrument-img {
-  padding: 0 50px;
+  margin: 0 50px;
   transform: scale(1);
   border-radius: 50px;
   cursor: pointer;
@@ -76,7 +76,8 @@ code {
   transform: translateX(-50%);
 } */
 
-#video {
+#video,
+#canvas {
   position: absolute;
   top: 0;
   width: 100vw;
