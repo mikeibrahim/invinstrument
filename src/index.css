@@ -117,4 +117,7 @@ a-marker {
 #osmdCanvasPage1 {
   background: rgba(255, 255, 255, 0.5);
   height: 300px;
+  position: absolute;
+  top: 50vh;
+  left: 0;
 }
