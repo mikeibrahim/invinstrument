@@ -7,6 +7,7 @@ import HandOverlay from "../../components/HandOverlay"
 import np from "noteplayer"
 import OpenSheetMusicDisplay from "./OpenSheetMusicDisplay"
 import { OpenSheetMusicDisplay as OSMD } from 'opensheetmusicdisplay';
+import AR from "../../components/AR"
 
 export default function SelectInstrument() {
     const [isPlaying, setIsPlaying] = useState(false)
@@ -61,6 +62,7 @@ export default function SelectInstrument() {
             </div>}
         {instrument === "piano" ? <OpenSheetMusicDisplay setupOsmd={setupOsmd} file="happy-bday.xml" /> : null}
         {/* <OpenSheetMusicDisplay setupOsmd={setupOsmd} file="happy-bday.xml" /> */}
+        <AR />
         <HandOverlay hoverCallback={({ x, y }) => {
             btns.forEach(b => {
                 if (!b.ref.current) return
