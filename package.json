@@ -2,6 +2,7 @@
   "name": "vmt",
   "version": "0.1.0",
   "private": true,
+  "main": "three.js/build/ar.js",
   "dependencies": {
     "@tensorflow-models/hand-pose-detection": "^2.0.0",
     "@testing-library/jest-dom": "^5.17.0",
@@ -11,7 +12,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.3",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "three": "0.96.0"
   },
   "scripts": {
     "start": "react-scripts start",
