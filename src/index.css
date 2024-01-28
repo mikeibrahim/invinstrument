@@ -1,5 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap");
 
+body {
+  width: 100vw !important;
+  height: 100vh !important;
+  margin-left: 0px !important;
+}
+
+a-scene {
+  width: 100vw !important;
+  height: calc(100vw / 1.333) !important;
+  top: 50vh;
+  transform: translateY(-50%);
+}
+
+a-marker {
+  width: 100% !important;
+  height: 100% !important;
+}
+
 * {
   font-family: "Fredoka", sans-serif;
   margin: 0;

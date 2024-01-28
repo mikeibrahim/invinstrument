@@ -2,9 +2,15 @@ import React from "react";
 
 export default function AR(props) {
   return (
-    <a-scene embedded arjs>
-      <a-box position="0 0.5 0" material="opacity: 0.5;"></a-box>
-      <a-marker-camera preset="hiro"></a-marker-camera>
+    <a-scene
+      embedded
+      arjs="patternRatio: 0.9; debugUIEnabled: false;"
+      vr-mode-ui="enabled: false"
+    >
+      <a-marker type="pattern" url="/marker.patt">
+        <a-box position="0 0.5 0" material="color: red;"></a-box>
+      </a-marker>
+      <a-entity camera></a-entity>
     </a-scene>
   );
 }
