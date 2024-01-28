@@ -102,6 +102,8 @@ export default function HandOverlay(props) {
       pointerCoordinate.x,
       pointerCoordinate.y
     );
+    pointerCoordinate.y +=
+      (window.screen.height - video.getBoundingClientRect().y) / 2;
 
     if (dist < 15) {
       props.hoverCallback(pointerCoordinate); // returns {x: __, y: __}

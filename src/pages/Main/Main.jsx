@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Video from "../../components/Video.jsx";
 import HandOverlay from "../../components/HandOverlay.jsx";
+import AR from "../../components/AR.jsx";
 
 export default function Main() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -27,6 +28,8 @@ export default function Main() {
         hoverCallback={() => {}}
         isPlaying={isPlaying}
       />
+
+      {/* <AR /> */}
     </div>
   );
 }
