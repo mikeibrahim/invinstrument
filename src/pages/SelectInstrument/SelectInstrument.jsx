@@ -37,7 +37,7 @@ export default function SelectInstrument() {
             : <div id="back-circle" className="btn">
                 <img src={LEFT_ARROW} alt="back" id="back" onClick={() => setInstrument("menu")}></img>
             </div>}
-        <HandOverlay hoverCallback={(x, y) => {
+        <HandOverlay hoverCallback={({ x, y }) => {
             instruments.forEach(i => {
                 const el = i.ref.current;
                 console.log(i.hover);
@@ -47,12 +47,14 @@ export default function SelectInstrument() {
                 ) i.hover[1](true)
                 else i.hover[1](false)
             })
-        }} clickCallback={(x, y) => {
+        }} clickCallback={({ x, y }) => {
+            console.log("pinch:", x, y)
             instruments.forEach(i => {
-                const el = i.ref.current;
+                const rect = i.ref.current.getBoundingClientRect();
+                console.log("rect:", rect, rect.left, rect.right, rect.top, rect.bottom)
                 if (
-                    el.x <= x && x <= el.x + el.width &&
-                    el.y <= y && y <= el.y + el.height
+                    rect.left <= x && x <= rect.right &&
+                    rect.top <= y && y <= rect.bottom
                 ) setInstrument(i.name)
             })
         }} isPlaying={isPlaying} />
