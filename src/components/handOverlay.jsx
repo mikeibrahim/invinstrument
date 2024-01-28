@@ -3,8 +3,9 @@ import "@tensorflow/tfjs-backend-webgl";
 
 import * as handPoseDetection from "@tensorflow-models/hand-pose-detection";
 import React, { useEffect, useState } from "react";
+import { distance } from "./Math";
 
-const key = {
+const handKey = {
   wrist: 0,
   thumb_cmc: 1,
   thumb_mcp: 2,
@@ -55,11 +56,15 @@ export default function HandOverlay(props) {
         setSize({ x: video.offsetWidth, y: video.offsetHeight });
       }
       intervalId = setInterval(() => {
-        detector.estimateHands(video).then((value) => {
-          const keypoints = value[0]?.keypoints;
-          drawHand(keypoints);
+        detector.estimateHands(video).then((hands) => {
+          console.log("hands: ", hands);
+          hands?.forEach((hand) => {
+            const keypoints = hand.keypoints;
+            drawHand(keypoints);
+            detectPinch(keypoints);
+          });
         });
-      }, 10);
+      }, 100);
     } else {
       clearInterval(intervalId);
     }
@@ -84,6 +89,21 @@ export default function HandOverlay(props) {
         false
       );
       ctx.fill(circle); //   <<< pass circle to context
+    }
+  };
+
+  const detectPinch = (keypoints) => {
+    const thumbCoordinate = keypoints[handKey.thumb_tip];
+    const pointerCoordinate = keypoints[handKey.index_finger_tip];
+    const dist = distance(
+      thumbCoordinate.x,
+      thumbCoordinate.y,
+      pointerCoordinate.x,
+      pointerCoordinate.y
+    );
+
+    if (dist < 15) {
+      props.clickCallback(pointerCoordinate); // returns {x: __, y: __}
     }
   };
 
