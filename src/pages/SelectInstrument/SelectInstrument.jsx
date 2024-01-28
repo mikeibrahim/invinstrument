@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import PIANO from './piano.png';
 import GUITAR from './guitar.png';
-import LEFT_ARROW from './left-arrow.svg';
+import LEFT_ARROW from './left-arrow.png';
 import Video from "../../components/Video";
+import HandOverlay from "../../components/HandOverlay";
 
 export default function SelectInstrument() {
     const [instrument, setInstrument] = useState("menu")
@@ -24,8 +25,9 @@ export default function SelectInstrument() {
                 {instruments.map((data, i) =>
                     <img className="instrument-img btn" key={i} src={data.image} alt={data.name} onClick={() => setInstrument(data.name)} />)}
             </div>
-            : <>
-                <img src={LEFT_ARROW} alt="back" id="back" className="btn" onClick={() => setInstrument("menu")}></img>
-            </>}
+            : <div id="back-circle" className="btn">
+                <img src={LEFT_ARROW} alt="back" id="back" onClick={() => setInstrument("menu")}></img>
+            </div>}
+        <HandOverlay />
     </>
 }

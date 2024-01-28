@@ -12,12 +12,18 @@ code {
 
 #title {
   display: block;
-  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 50vw;
+  transform: translateX(-50%);
   text-align: center;
-  padding: 50px 0;
+  padding: 25px 40px;
+  margin: 50px;
+  border-radius: 50px;
   font-weight: 600;
-  font-size: 50pt;
-  background: ;
+  font-size: 40pt;
+  color: white;
+  background: #8684f2;
 }
 
 #instruments {
@@ -33,22 +39,27 @@ code {
 .instrument-img {
   padding: 0 50px;
   transform: scale(1);
+  border-radius: 50px;
   cursor: pointer;
 }
 
 #back {
-  border-radius: 100%;
-  height: 75px;
-  width: 75px;
-  border-width: 5px;
+  height: 80px;
+}
+
+#back-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #8684f2;
   cursor: pointer;
-  background: white;
-  color: #9892e5;
-  font-weight: bold;
-  font-size: 15pt;
   position: absolute;
   top: 50px;
   left: 50px;
+  width: 120px;
+  height: 120px;
 }
 
 .btn:hover {
@@ -56,12 +67,20 @@ code {
   transition: all 0.25s;
 }
 
-#video,
-#hand-canvas {
+/* #video {
   position: absolute;
   top: 0;
   height: 100vh;
   z-index: -1;
   left: 50vw;
   transform: translateX(-50%);
+} */
+
+#video {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  z-index: -1;
+  top: 50vh;
+  transform: translateY(-50%);
 }
