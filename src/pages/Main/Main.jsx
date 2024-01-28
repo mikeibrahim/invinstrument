@@ -25,6 +25,7 @@ export default function Main() {
         clickCallback={clickCallback}
         hoverCallback={() => {}}
         isPlaying={isPlaying}
+        keypressCallback={() => {}}
       />
     </div>
   );
